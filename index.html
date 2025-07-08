@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prince - Greatest Hits Audio Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6b46c1, #9333ea);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .player-container {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 30px;
+        }
+        
+        .audio-note {
+            background: rgba(255,215,0,0.2);
+            border: 1px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .youtube-player {
+            width: 100%;
+            height: 315px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .playlist-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .playlist-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+        
+        .playlist-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .playlist-card.active {
+            background: linear-gradient(45deg, rgba(255,107,107,0.3), rgba(255,215,0,0.3));
+            border-color: #ffd700;
+        }
+        
+        .playlist-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .playlist-info {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        .current-playing {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .current-playing h2 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .youtube-player {
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 PRINCE 🎵</h1>
+            <p>Greatest Hits Audio Player</p>
+        </div>
+        
+        <div class="player-container">
+            <div class="audio-note">
+                🎧 <strong>Audio Focus:</strong> Official Prince playlists for uninterrupted listening. Minimize video for audio-only experience.
+            </div>
+            
+            <div class="current-playing">
+                <h2 id="current-title">Prince - 4EVER Greatest Hits</h2>
+                <p id="current-info">Official compilation • 2:35:06 runtime</p>
+            </div>
+            
+            <iframe id="youtube-player" class="youtube-player" 
+                    src="https://www.youtube.com/embed/tTwyVNnfjzU?autoplay=0&controls=1&modestbranding=1" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+            </iframe>
+        </div>
+        
+        <div class="playlist-options">
+            <div class="playlist-card active" onclick="loadPlaylist('tTwyVNnfjzU', 'Prince - 4EVER Greatest Hits', 'Official compilation • 2:35:06')">
+                <div class="playlist-title">🏆 Greatest Hits Collection</div>
+                <div class="playlist-info">
+                    Official 4EVER album<br>
+                    40+ classic songs<br>
+                    2.5 hours of music
+                </div>
+            </div>
+            
+            <div class="playlist-card" onclick="loadPlaylist('81jraQDTJJk', 'Purple Rain - Full Album', 'Remastered album • 43:49')">
+                <div class="playlist-title">💜 Purple Rain Album</div>
+                <div class="playlist-info">
+                    2015 Paisley Park Remaster<br>
+                    Complete album<br>
+                    44 minutes
+                </div>
+            </div>
+            
+            <div class="playlist-card" onclick="loadPlaylist('TvnYmWpD_T8', 'Purple Rain - Single', 'Official video • 7:58')">
+                <div class="playlist-title">🌧️ Purple Rain (Single)</div>
+                <div class="playlist-info">
+                    Most iconic song<br>
+                    Official music video<br>
+                    266M+ views
+                </div>
+            </div>
+            
+            <div class="playlist-card" onclick="loadPlaylist('UG3VcCAlUgE', 'When Doves Cry', 'Official video • 3:45')">
+                <div class="playlist-title">🕊️ When Doves Cry</div>
+                <div class="playlist-info">
+                    #1 hit single<br>
+                    Official music video<br>
+                    121M+ views
+                </div>
+            </div>
+            
+            <div class="playlist-card" onclick="loadPlaylist('H9tEvfIsDyo', 'Kiss', 'Official video • 3:56')">
+                <div class="playlist-title">💋 Kiss</div>
+                <div class="playlist-info">
+                    Grammy winner<br>
+                    Official music video<br>
+                    82M+ views
+                </div>
+            </div>
+            
+            <div class="playlist-card" onclick="loadPlaylist('rblt2EtFfC4', '1999', 'Official video • 3:46')">
+                <div class="playlist-title">🎉 1999</div>
+                <div class="playlist-info">
+                    Party anthem<br>
+                    Official music video<br>
+                    35M+ views
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function loadPlaylist(videoId, title, info) {
+            const player = document.getElementById('youtube-player');
+            const titleElement = document.getElementById('current-title');
+            const infoElement = document.getElementById('current-info');
+            
+            // Update player
+            player.src = `https://www.youtube.com/embed/${videoId}?autoplay=0&controls=1&modestbranding=1`;
+            
+            // Update info
+            titleElement.textContent = title;
+            infoElement.textContent = info;
+            
+            // Update active card
+            document.querySelectorAll('.playlist-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.target.closest('.playlist-card').classList.add('active');
+        }
+    </script>
+</body>
+</html>
